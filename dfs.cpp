@@ -1,0 +1,83 @@
+// CPP Program to determine level of each node
+// and print level
+#include <bits/stdc++.h>
+using namespace std;
+
+// function to determine level of each node starting
+// from x using BFS
+void printLevels(vector<int> graph[], int V, int x)
+{
+	// array to store level of each node
+	int level[V];
+	bool marked[V];
+
+	// create a queue
+	queue<int> que;
+
+	// enqueue element x
+	que.push(x);
+
+	// initialize level of source node to 0
+	level[x] = 0;
+
+	// marked it as visited
+	marked[x] = true;
+
+	// do until queue is empty
+	while (!que.empty()) {
+
+		// get the first element of queue
+		x = que.front();
+
+		// dequeue element
+		que.pop();
+
+		// traverse neighbors of node x
+		for (int i = 1; i <= graph[x].size(); i++) {
+			// b is neighbor of node x
+			int b = graph[x][i];
+
+			// if b is not marked already
+			if (!marked[b]) {
+
+				// enqueue b in queue
+				que.push(b);
+
+				// level of b is level of x + 1
+				level[b] = level[x] + 1;
+
+				// mark b
+				marked[b] = true;
+			}
+		}
+	}
+
+	// display all nodes and their levels
+	cout << "Nodes"
+		<< " "
+		<< "Level" << endl;
+	for (int i = 1; i <= V; i++)
+		cout << " " << i << " --> " << level[i] << endl;
+}
+
+// Driver Code
+int main()
+{
+	// adjacency graph for tree
+	int n,a ;
+	cin>>n ;
+	vector<int> graph[n+2];
+
+	for(int i=1 ;i<=n ;i++)
+      {
+            cin>>a ;
+            graph[i].push_back(a) ;
+           // graph[a].push_back(i) ;
+      }
+
+	// call levels function with source as 0
+	printLevels(graph, n, 1);
+
+	return 0;
+}
+
