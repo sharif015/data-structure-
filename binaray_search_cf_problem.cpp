@@ -28,8 +28,8 @@ for(int i=0 ; i<n;i++)
 {
       cin>>arr[i];
 }
-ll l=0 ,r=n;
-while(l<=r)
+ll l=0 ,r=n+1;
+while(r-l>1)
 {
       ll mid=(l+r)/2 ;
       if(cost(arr,mid)<=s)
