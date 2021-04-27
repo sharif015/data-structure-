@@ -50,12 +50,18 @@ void insertatanypoint(int data ,int pos)
             h=h->next ;
             k++ ;
       }
-      cout<<h->data <<endl ;
+     if(pos==1)
+     {
+           insertatfirst(data);
+     }
+     else
+     {
 
      tmp->prev=h;
       h->next->prev=tmp ;
      tmp->next=h->next ;
      h->next=tmp ;
+     }
 
 
 }
@@ -69,54 +75,59 @@ void deletedatanypoint(int pos)
         tmp=tmp->next ;
         k++ ;
       }
+      if(pos==1)
+      {
+            tmp->next->prev=NULL ;
+
+            head=tmp->next ;
+            free(tmp) ;
+      }
+      else{
       tmp->prev->next=tmp->next ;
       tmp->next->prev=tmp->prev ;
       free(tmp);
+      }
+}
+void display()
+{
+      struct node *t,*rev ;
+      t=head ;
+      rev=tmp ;
+      while(t!=NULL)
+      {
+            cout<<t->data<<" " ;
+            t=t->next ;
+      }
+      cout<<endl ;
+      while(rev!=NULL)
+      {
+            cout<<rev->data <<" " ;
+            rev=rev->prev ;
+      }
+
 }
 int main()
 {
-for(int i=0 ;i<5;i++)
+      printf("Enter numbers of node: \n");
+      int a ,b,c,d,e;
+      cin>>a ;
+for(int i=0 ;i<a;i++)
 {
       int a ;
       cin>>a ;
       insert_(a);
 }
-insertatfirst(33);
-insertatanypoint(44,3) ;
-struct node *t=head ;
-while(t!=NULL)
-{
-    cout<<t->data <<" " ;
-    t=t->next ;
+printf("enter value to insert at first: \n");
+cin>>b ;
+insertatfirst(b);
+printf("enter at any position ;type data & position: \n");
+cin>>c>>d ;
+insertatanypoint(c,d) ;
+display();
 
-}
-struct node *tt ;
-tt=tmp ;
-cout<<"\n" ;
-while(tt!=NULL )
-{
+printf("enter a position to delete: \n");
+cin>>e ;
+deletedatanypoint(e);
+display();
 
-      cout<<tt->data<<" "  ;
-
-      tt=tt->prev ;
-}
-cout<<endl ;
-deletedatanypoint(2);
-struct node *ttt=head ;
-while(ttt!=NULL)
-{
-    cout<<ttt->data <<" " ;
-    ttt=ttt->next ;
-
-}
-struct node *tte;
-tte=tmp ;
-cout<<"\n" ;
-while(tte!=NULL )
-{
-
-      cout<<tte->data<<" "  ;
-
-      tte=tte->prev ;
-}
 }
